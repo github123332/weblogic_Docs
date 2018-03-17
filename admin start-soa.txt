@@ -1,0 +1,102 @@
+QAT:
+
+
+sudo /etc/init.d/nodemanager_7199 stop
+sudo /etc/init.d/nodemanager_7275 start
+
+==============
+
+starting SOA QAT:
+
+elb1cn16
+
+Set environment :
+
+cd /u01/app/oracle/mw_soaqat001/wlserver_10.3/server/bin
+./setWLSEnv.sh
+
+cd /u01/app/oracle/mw_soaqat001/wlserver_10.3/common/bin
+./wlst.sh
+
+
+(above path is same for PRD)
+
+
+nmConnect('ndmgr','ndmgr1','elb1cn16-priv','7275','domain_SOA_ENG_QAT','/u01/SOA_QAT/domains/elb1cn16/domain_SOA_ENG_QAT','plain')
+
+
+
+
+To Start Admin
+prps=makePropertiesObject("Arguments=-Dweblogic.Stdout=/u01/SOA_QAT/logs/domain_SOA_ENG_QAT/AdminServer/AdminServer.out -Dweblogic.Stderr=/u01/SOA_QAT/logs/domain_SOA_ENG_QAT/AdminServer/AdminServer_err.out")
+nmStart('AdminServer',props=prps)
+
+
+
+To Stop Admin
+nmKill('AdminServer')
+
+
+
+
+
+PROD
+nmConnect('ndmgr','ndmgr1','10.24.238.14','7297','domain_ENG_SOA_PRD','/u01/ENGSOA_PRD/domains/ela1cn13/domain_ENG_SOA_PRD','plain')
+
+prps=makePropertiesObject("Arguments=-Dweblogic.Stdout=/u01/ENGSOA_PRD/logs/domain_ENG_SOA_PRD/AdminServer/AdminServer.out -Dweblogic.Stderr=/u01/ENGSOA_PRD/logs/domain_ENG_SOA_PRD/AdminServer/AdminServer_err.out")
+===========================
+
+
+10.24.240.17:7122/soa-infra
+
+
+archieval process pending
+
+http://elb1cn16.statoilfuelretail.com
+/u01/app/oracle/mw_soaqat001/Oracle_SOA1/common/bin
+
+/u01/app/oracle/mw_soaqat001/Oracle_SOA1/bin
+
+AIA_Installation
+
+./runInstaller -invPtrLoc /u01/app/oracle/mw_soaqat001/Oracle_SOA1/oraInst.loc -jreloc /u01/app/oracle/java/java64/jrockit-jdk1.6.0_29/
+
+
+
+===================================
+
+
+dist_B2B_OUT_QUEUE_auto : jms/b2b/B2B_OUT_QUEUE 
+
+* dist_B2B_IN_QUEUE_auto : jms/b2b/B2B_IN_QUEUE 
+
+* dist_B2BBroadcastTopic_auto : jms/b2b/B2BBroadcastTopic 
+
+* dist_XmlSchemaChangeNotificationTopic_auto : jms/fabric/XmlSchemaChangeNotificationTopic 
+
+Shobhlika Singh 11:51 AM
+jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=sdp)(HOST=soadbhost-ibvip.statoilfuelretail.com)(PORT=1522))(CONNECT_DATA=(SERVICE_NAME=soa001p.statoilfuelretail.com)))
+Call with Shobhlika Singh (shsin@statoilfuelretail.com) has ended. Duration : 0:17:20 
+Shobhlika Singh 11:57 AM
+
+
+This is the example for SOA QAT DataSource SDP change : 
+jdbc:oracle:thin:@(DESCRIPTION=(ADDRESS=(PROTOCOL=sdp)(HOST=ed2adb02-ibvip.statoilfuelretail.com)(PORT=1522))(CONNECT_DATA=(SERVICE_NAME=soa001q.statoilfuelretail.com)))
+
+
+
+http://10.24.238.10:11705/ucm-ws/UCMCustomWebPort?WSDL
+
+
+
+
+
+
+
+2) wcp-qa.statoilfuelretail.com-TCP80 (145.247.13.161:80) - HTTP Type: AD DRESS
+3) wcp-qa.statoilfuelretail.com-TCP443 (145.247.13.161:443) - SSL_BRIDGE T ype: ADDRESS
+4) wcp-qa.statoilfuelretail.com-TCP11107 (145.247.13.161:11107) - HTTP T ype: ADDRESS
+
+
+
+

@@ -1,0 +1,37 @@
+#!/bin/bash
+#Created by rispr on 11thNov2016
+#Script for rotating weblogic server out log files
+array=( /u01/SOA_PRD/logs/domain_SOA_PRD01/AdminServer/AdminServer.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_bam_PRD01/server_bam_PRD01.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_bam_PRD02/server_bam_PRD02.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD01/server_soa_PRD01.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD02/server_soa_PRD02.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD03/server_soa_PRD03.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD04/server_soa_PRD04.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD05/server_soa_PRD05.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD06/server_soa_PRD06.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_osr_PRD01/server_osr_PRD01.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_osr_PRD02/server_osr_PRD02.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_wsm_PRD01/server_wsm_PRD01.out /u01/SOA_PRD/logs/domain_SOA_PRD01/server_wsm_PRD02/server_wsm_PRD02.out )
+
+for logfile in "${array[@]}"
+do
+  MAXSIZE=10000000
+# MAXSIZE=1000
+
+ LOGFILE_SIZE=$(ls -l $logfile | tr -s " " | cut -d" " -f5)
+ if [ "$LOGFILE_SIZE" -ge "$MAXSIZE" ];
+ then
+ #timestamp=`date +%Y%m%d`
+ timestamp=`date +%Y%m%d_%T`
+ newlogfile=$logfile.$timestamp
+ cp $logfile $newlogfile
+ cat /dev/null > $logfile
+ #gzip -f -9 $newlogfile
+ fi
+ echo "$logfile is below max threshold" > /dev/null 2>&1
+
+done
+#echo "files older than 15 days deleted..."
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/AdminServer/AdminServer.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_bam_PRD01/server_bam_PRD01.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_bam_PRD02/server_bam_PRD02.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD01/server_soa_PRD01.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD02/server_soa_PRD02.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD03/server_soa_PRD03.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD04/server_soa_PRD04.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD05/server_soa_PRD05.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_soa_PRD06/server_soa_PRD06.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_osr_PRD01/server_osr_PRD01.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_osr_PRD02/server_osr_PRD02.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_wsm_PRD01/server_wsm_PRD01.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f
+find "/u01/SOA_PRD/logs/domain_SOA_PRD01/server_wsm_PRD02/server_wsm_PRD02.out" -not -name '*.out' -name '*.out*' -type f -mtime +15 | xargs rm -f

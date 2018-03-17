@@ -1,0 +1,14 @@
+skills:Weblogic Server 9.x/10.x ,11g, Oracle SOA suite 11g, Oracle Service Bus(OSB), BAM BPEL Process Manager, Human Work Flow, Mediators, Apache HTTP Server 2.x,Oracle HTTP Server 11g, Oracle11g, Linux, , Winscp,Putty,Jconsole
+
+
+OSB suite 	11g 	2013 	2 Year(s) 02 Month(s)
+WebLogic 	11g 	2013 	4 Year(s) 05 Month(s)
+ORACLE SOA SUITE 	11g 	2013 	2 Year(s) 03 Month(s)
+Apache HTTP Server 	2.x 	2013 	2 Year(s) 00 Month(s)
+Oracle HTTP Server 	11g 	2012 	3 Year(s) 00 Month(s)
+Oracle 	10g/11g 	2013 	4 Year(s) 04 Month(s) 
+
+
+Bsc with 4+ yrs Exp as a Oracle Fusion Middleware Administrator as soa administrator as weblogic administrator as system administrator
+
+INNOVATION Technologies Pvt Ltd

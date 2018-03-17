@@ -1,0 +1,24 @@
+SOA Deployment
+
+[wcadmin@sfrvm014 PYTPALS]$ pwd
+/u02/Deployment_Engage/Eng_App_Deployment/ENG_PYT/PYTPALS
+[wcadmin@sfrvm014 PYTPALS]$ hostname
+sfrvm014
+[wcadmin@sfrvm014 PYTPALS]$
+
+
+/u02/Deployment_Engage/Eng_App_Deployment
+./AntEnvironment.sh
+
+ant -f build_sca_composite.xml
+
+ant -f build_sca_composite.xml deploy-composite
+
+
+ENV-QAT for PYTPALS
+
+Common_Utilities
+PALS
+PYTPLAS
+etc.
+

@@ -1,0 +1,35 @@
+export SCRIPT_LOC=/home/soawls/Servers_Health_Status
+echo "Location Found"
+
+cd /u01/SOA_PRD/domains/ela1cn16/domain_SOA_PRD01/bin
+echo "Path Found"
+
+. ./setDomainEnv.sh
+echo "Path set"
+pwd
+java weblogic.WLST /home/soawls/Servers_Health_Status/Serverhealthcheck.py > /home/soawls/Servers_Health_Status/Servers_Health1.txt
+echo "Script run and log updated"
+
+cd /home/soawls/Servers_Health_Status
+echo "Script path Found"
+
+
+cat Servers_Health1.txt|grep -e "RUNNING" |wc -l > Server_Health_status_final1.csv
+echo "final log updated"
+
+
+# okay search for errors in file
+error_log=$(grep -c -i "13" /home/soawls/Servers_Health_Status/Server_Health_status_final1.csv)
+echo "error_log"
+# error found or not?
+if [ "$error_log" -eq 1 ]
+then    # yes error(s) found, let send an email
+       echo "All servers are Running Fine"
+else    # naa, everything looks okay
+        echo "Servers are not Running"
+      mailx -s "SOA SERVERS HEALTH ALERT -- PRD ENVIRONMENT-----:::Please check servers health status || some of the servers are not running" venkat.palakeela@lntinfotech.com,SFRFusionAdmin@statoilfuelretail.com < /home/soawls/Servers_Health_Status/contacts1.txt
+
+
+fi
+echo "mail sent"
+
